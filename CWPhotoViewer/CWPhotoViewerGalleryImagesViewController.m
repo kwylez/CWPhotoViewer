@@ -71,7 +71,7 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
 
-  CWPhotoViewerPageViewController *pageController = [[CWPhotoViewerPageViewController alloc] init];
+  CWPhotoViewerPageViewController *pageController = [[CWPhotoViewerPageViewController alloc] initWithIndex:indexPath.row];
 
   pageController.imageArray = [self galleryImages];
 
