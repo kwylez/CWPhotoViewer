@@ -7,9 +7,9 @@
 //
 
 #import "CWPhotoViewerMasterViewController.h"
-
 #import "CWPhotoViewerGalleryImagesViewController.h"
 #import "CWPhotoViewerGridFlowLayout.h"
+#import "CWPhotoViewerGalleryListingCell.h"
 
 @interface CWPhotoViewerMasterViewController()
 @property (nonatomic, strong)  NSMutableArray *objects;
@@ -52,14 +52,17 @@
 
   [super viewDidLoad];
 
-  [self.tableView registerClass:[UITableViewCell class]
+  [self.tableView registerClass:[CWPhotoViewerGalleryListingCell class]
          forCellReuseIdentifier:@"Cell"];
 
   [self fetchGalleryListings];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
+
   [super viewWillAppear:animated];
+
+  self.navigationController.navigationBar.translucent = YES;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -84,11 +87,7 @@
 
   static NSString *CellIdentifier = @"Cell";
 
-  UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-
-  cell.accessoryType         = UITableViewCellAccessoryDisclosureIndicator;
-  cell.imageView.frame       = CGRectMake(0, 0, 55, 55);
-  cell.imageView.contentMode = UIViewContentModeScaleAspectFit;
+  CWPhotoViewerGalleryListingCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 
   ALAssetsGroup *g = (ALAssetsGroup*)[self.objects objectAtIndex:indexPath.row];
 
@@ -96,8 +95,8 @@
 
   NSInteger gCount = [g numberOfAssets];
 
-  cell.textLabel.text = [NSString stringWithFormat:@"%@ (%d)",[g valueForProperty:ALAssetsGroupPropertyName], gCount];
-  cell.textLabel.adjustsFontSizeToFitWidth = YES;
+  cell.galleryNameLabel.text  = [NSString stringWithFormat:@"%@", [g valueForProperty:ALAssetsGroupPropertyName]];
+  cell.galleryCountLabel.text = [NSString stringWithFormat:@"(%d)", gCount];
 
   [cell.imageView setImage:[UIImage imageWithCGImage:[(ALAssetsGroup *)[_objects objectAtIndex:indexPath.row] posterImage]]];
 
@@ -113,8 +112,6 @@
 
   gallery.photoGroup   = g;
   gallery.galleryTitle = [g valueForProperty:ALAssetsGroupPropertyName];
-
-  self.navigationController.navigationBar.translucent = YES;
 
   [self.navigationController pushViewController:gallery animated:YES];
 }
