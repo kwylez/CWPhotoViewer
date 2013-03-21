@@ -11,9 +11,8 @@
 #import "CWPhotoViewerGalleryImagesViewController.h"
 #import "CWPhotoViewerGridFlowLayout.h"
 
-@interface CWPhotoViewerMasterViewController () {
-  NSMutableArray *_objects;
-}
+@interface CWPhotoViewerMasterViewController()
+@property (nonatomic, strong)  NSMutableArray *objects;
 
 - (void)fetchGalleryListings;
 
@@ -53,6 +52,9 @@
 
   [super viewDidLoad];
 
+  [self.tableView registerClass:[UITableViewCell class]
+         forCellReuseIdentifier:@"Cell"];
+
   [self fetchGalleryListings];
 }
 
@@ -75,7 +77,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-  return _objects.count;
+  return self.objects.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -84,16 +86,11 @@
 
   UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
 
-  if (cell == nil) {
+  cell.accessoryType         = UITableViewCellAccessoryDisclosureIndicator;
+  cell.imageView.frame       = CGRectMake(0, 0, 55, 55);
+  cell.imageView.contentMode = UIViewContentModeScaleAspectFit;
 
-    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-
-    cell.accessoryType         = UITableViewCellAccessoryDisclosureIndicator;
-    cell.imageView.frame       = CGRectMake(0, 0, 55, 55);
-    cell.imageView.contentMode = UIViewContentModeScaleAspectFit;
-  }
-
-  ALAssetsGroup *g = (ALAssetsGroup*)[_objects objectAtIndex:indexPath.row];
+  ALAssetsGroup *g = (ALAssetsGroup*)[self.objects objectAtIndex:indexPath.row];
 
   [g setAssetsFilter:[ALAssetsFilter allPhotos]];
 
@@ -104,15 +101,13 @@
 
   [cell.imageView setImage:[UIImage imageWithCGImage:[(ALAssetsGroup *)[_objects objectAtIndex:indexPath.row] posterImage]]];
 
-	[cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
-
   return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 
   CWPhotoViewerGridFlowLayout *layout = [[CWPhotoViewerGridFlowLayout alloc] init];
-  ALAssetsGroup *g         = (ALAssetsGroup*)[_objects objectAtIndex:indexPath.row];
+  ALAssetsGroup *g         = (ALAssetsGroup*)[self.objects objectAtIndex:indexPath.row];
 
   CWPhotoViewerGalleryImagesViewController *gallery = [[CWPhotoViewerGalleryImagesViewController alloc] initWithCollectionViewLayout:layout];
 
@@ -140,16 +135,16 @@
 
         if ([group valueForProperty:ALAssetsGroupPropertyName]) {
 
-          if (!_objects) {
+          if (!self.objects) {
 
-            _objects = [[NSMutableArray alloc] init];
+            self.objects = [[NSMutableArray alloc] init];
           }
 
           NSLog(@"album: %@", [group valueForProperty:ALAssetsGroupPropertyName]);
 
-          [_objects addObject:group];
+          [self.objects addObject:group];
 
-          dispatch_sync(dispatch_get_main_queue(), ^{
+          dispatch_async(dispatch_get_main_queue(), ^{
             [[self tableView] reloadData];
           });
         }
