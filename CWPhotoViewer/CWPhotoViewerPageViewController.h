@@ -13,7 +13,10 @@
 
 @interface CWPhotoViewerPageViewController : UIViewController <UIPageViewControllerDataSource, UIPageViewControllerDelegate>
 
-@property (nonatomic, strong) NSMutableArray *imageArray;
+@property (nonatomic, copy) NSArray *imageArray;
 @property (nonatomic, strong) UIPageViewController *pageController;
+@property (nonatomic, assign, readonly) NSInteger currentIndex;
+
+- (id)initWithIndex:(NSInteger)idx;
 
 @end
