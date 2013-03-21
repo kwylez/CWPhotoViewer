@@ -13,7 +13,9 @@
 
 @interface CWPhotoViewerGalleryImagesViewController ()
 
-- (NSMutableArray *)galleryImages;
+@property (nonatomic, strong) NSMutableArray *galleryImages;
+
+- (void)fetchGalleryImages;
 
 @end
 
@@ -46,6 +48,8 @@
   [self.collectionView registerClass:[CWPhotoViewerGalleryPhotoListingFooterView class]
           forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
                  withReuseIdentifier:@"PhotoListingFooter"];
+
+  [self fetchGalleryImages];
 }
 
 - (NSInteger)collectionView:(UICollectionView *)view numberOfItemsInSection:(NSInteger)section; {
@@ -113,18 +117,21 @@
 
 #pragma mark - Private Methods
 
-- (NSMutableArray *)galleryImages {
+- (void)fetchGalleryImages {
 
-  NSMutableArray *collector = [NSMutableArray new];
+  if (!self.galleryImages.count) {
 
-  [self.photoGroup enumerateAssetsUsingBlock:^(ALAsset *asset, NSUInteger index, BOOL *stop) {
+    self.galleryImages = [NSMutableArray new];
 
-   if (asset) {
-     [collector addObject:asset];
-   }
-  }];
+    [self.photoGroup enumerateAssetsUsingBlock:^(ALAsset *asset, NSUInteger index, BOOL *stop) {
 
-  return collector;
+      if (asset) {
+        [self.galleryImages addObject:asset];
+      }
+    }];
+
+    [self.collectionView reloadData];
+  }
 }
 
 @end
