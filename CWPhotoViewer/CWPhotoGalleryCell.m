@@ -10,7 +10,16 @@
 
 NSString * const  CWPhotoGalleryCellIdentifier = @"CWPhotoGalleryCell";
 
-@interface CWPhotoGalleryCell()
+static const CGFloat ZOOM_FACTOR     = 1.5f;
+static const CGFloat MAX_ZOOM_FACTOR = 2.5f;
+
+@interface CWPhotoGalleryCell()<UIScrollViewDelegate>
+
+@property (nonatomic, strong) UIImageView *imageView;
+@property (nonatomic, strong) UIScrollView *scrollView;
+
+- (CGRect)zoomRectForScale:(CGFloat)scale withCenter:(CGPoint)center;
+- (void)addGestures;
 
 @end
 
@@ -22,22 +31,109 @@ NSString * const  CWPhotoGalleryCellIdentifier = @"CWPhotoGalleryCell";
   
   if (self) {
 
-    _imageView = [[UIImageView alloc] initWithFrame:self.bounds];
+    _scrollView = [[UIScrollView alloc] initWithFrame:CGRectZero];
     
-    _imageView.contentMode = UIViewContentModeScaleAspectFit;
+    _scrollView.clipsToBounds = YES;
+    _scrollView.delegate      = self;
     
-    [self.contentView addSubview:_imageView];
+    _imageView = [[UIImageView alloc] initWithFrame:CGRectZero];
+    
+    _imageView.contentMode            = UIViewContentModeScaleAspectFit;
+    _imageView.userInteractionEnabled = YES;
+    
+    [_scrollView addSubview:_imageView];
+
+    [self.contentView addSubview:_scrollView];
+    
+    [self addGestures];
   }
+
   return self;
 }
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
+- (void)layoutSubviews {
+  
+  [super layoutSubviews];
+  
+  self.scrollView.frame       = self.imageView.frame = self.bounds;
+  self.scrollView.contentSize = self.imageView.frame.size;
+  
+  CGFloat minimumScale = self.scrollView.frame.size.width / self.imageView.frame.size.width;
+
+  self.scrollView.maximumZoomScale = MAX_ZOOM_FACTOR;
+  self.scrollView.minimumZoomScale = minimumScale;
+  self.scrollView.zoomScale        = minimumScale;
 }
-*/
+
+#pragma mark - Setters
+
+- (void)setImage:(UIImage *)image {
+
+  _image = image;
+
+  self.imageView.image = image;
+}
+
+#pragma mark - UIScrollView Delegate
+
+- (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView {
+  return self.imageView;
+}
+
+#pragma mark - Private Methods
+
+- (CGRect)zoomRectForScale:(CGFloat)scale withCenter:(CGPoint)center {
+  
+  CGRect zoomRect;
+  
+  /**
+   * The zoom rect is in the content view's coordinates.
+   * At a zoom scale of 1.0, it would be the size of the imageScrollView's bounds.
+   * As the zoom scale decreases, so more content is visible, the size of the rect grows.
+   */
+
+  zoomRect.size.height = self.scrollView.frame.size.height / scale;
+  zoomRect.size.width  = self.scrollView.frame.size.width / scale;
+
+  /**
+   * Get the correct origin from center and zoom
+   */
+  
+  zoomRect.origin.x = center.x - (zoomRect.size.width / 2.0);
+  zoomRect.origin.y = center.y - (zoomRect.size.height / 2.0);
+  
+  return zoomRect; 
+}
+
+- (void)addGestures {
+  
+  UITapGestureRecognizer *doubleTap    = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleDoubleTap:)];
+  UITapGestureRecognizer *twoFingerTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTwoFingerTap:)];
+  
+  [doubleTap setNumberOfTapsRequired:2];
+  [twoFingerTap setNumberOfTouchesRequired:2];
+
+  [self.imageView addGestureRecognizer:doubleTap];
+  [self.imageView addGestureRecognizer:twoFingerTap];
+}
+
+- (void)handleDoubleTap:(UIGestureRecognizer *)gestureRecognizer {
+
+  CGFloat newScale = self.scrollView.zoomScale * ZOOM_FACTOR;
+  CGRect zoomRect  = [self zoomRectForScale:newScale
+                                 withCenter:[gestureRecognizer locationInView:gestureRecognizer.view]];
+  
+  [self.scrollView zoomToRect:zoomRect animated:YES];
+}
+
+- (void)handleTwoFingerTap:(UIGestureRecognizer *)gestureRecognizer {
+
+  CGFloat newScale = self.scrollView.zoomScale / ZOOM_FACTOR;
+  CGRect zoomRect  = [self zoomRectForScale:newScale
+                                 withCenter:[gestureRecognizer locationInView:gestureRecognizer.view]];
+
+  [self.scrollView zoomToRect:zoomRect animated:YES];
+}
+
 
 @end

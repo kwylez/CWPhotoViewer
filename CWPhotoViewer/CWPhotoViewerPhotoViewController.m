@@ -45,8 +45,6 @@ forCollectionViewLayout:(UICollectionViewLayout *)layout {
   [self.collectionView setPagingEnabled:YES];
   [self.collectionView registerClass:[CWPhotoGalleryCell class]
           forCellWithReuseIdentifier:CWPhotoGalleryCellIdentifier];
-  
-  NSLog(@"photo: %@", self.imageArray[0]);
 }
 
 #pragma mark - UICollectionView Delegate and Datasource Methods
@@ -63,13 +61,14 @@ forCollectionViewLayout:(UICollectionViewLayout *)layout {
   
   CWPhotoGalleryCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CWPhotoGalleryCellIdentifier
                                                                        forIndexPath:indexPath];
-  ALAsset *photo             = [self.imageArray objectAtIndex:indexPath.row];    
+
+  ALAsset *photo             = [self.imageArray objectAtIndex:indexPath.row];
   ALAssetRepresentation *rep = [photo defaultRepresentation];
 
   CGImageRef ref = [rep fullScreenImage];
   UIImage *img   = [[UIImage alloc] initWithCGImage:ref];
   
-  cell.imageView.image = img;
+  cell.image = img;
 
   return cell;
 }
@@ -77,7 +76,7 @@ forCollectionViewLayout:(UICollectionViewLayout *)layout {
 - (CGSize)collectionView:(UICollectionView *)collectionView
                   layout:(UICollectionViewLayout *)collectionViewLayout
   sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-  
+
   return self.view.bounds.size;
 }
 
