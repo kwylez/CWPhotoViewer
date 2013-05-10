@@ -12,14 +12,11 @@ NSString * const  CWPhotoGalleryCellIdentifier = @"CWPhotoGalleryCell";
 
 @interface CWPhotoGalleryCell()
 
-@property (nonatomic, strong) UIImageView *imageView;
-
 @end
 
 @implementation CWPhotoGalleryCell
 
-- (id)initWithFrame:(CGRect)frame
-{
+- (id)initWithFrame:(CGRect)frame {
   
   self = [super initWithFrame:frame];
   

@@ -8,7 +8,8 @@
 
 #import "CWPhotoViewerGalleryImagesViewController.h"
 #import "CWPhotoViewerGridCell.h"
-#import "CWPhotoViewerPageViewController.h"
+#import "CWPhotoViewerPhotoViewController.h"
+#import "CWPhotoGalleryFlowLayout.h"
 #import "CWPhotoViewerGalleryPhotoListingFooterView.h"
 
 @interface CWPhotoViewerGalleryImagesViewController ()
@@ -43,11 +44,11 @@
   self.collectionView.backgroundColor = [UIColor whiteColor];
 
   [self.collectionView registerClass:[CWPhotoViewerGridCell class]
-          forCellWithReuseIdentifier:@"THUMBNAIL_CELL"];
+          forCellWithReuseIdentifier:CWPhotoViewerGridCellIdentifier];
 
   [self.collectionView registerClass:[CWPhotoViewerGalleryPhotoListingFooterView class]
           forSupplementaryViewOfKind:UICollectionElementKindSectionFooter
-                 withReuseIdentifier:@"PhotoListingFooter"];
+                 withReuseIdentifier:CWPhotoViewerFooterIdentifier];
 
   [self fetchGalleryImages];
 }
@@ -58,7 +59,7 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)cv cellForItemAtIndexPath:(NSIndexPath *)indexPath; {
 
-  CWPhotoViewerGridCell *cell = [cv dequeueReusableCellWithReuseIdentifier:@"THUMBNAIL_CELL"
+  CWPhotoViewerGridCell *cell = [cv dequeueReusableCellWithReuseIdentifier:CWPhotoViewerGridCellIdentifier
                                                    forIndexPath:indexPath];
 
   ALAsset *asset = (ALAsset *)[self galleryImages][indexPath.row];
@@ -70,15 +71,18 @@
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-
-  CWPhotoViewerPageViewController *pageController = [[CWPhotoViewerPageViewController alloc] initWithIndex:indexPath.row];
-
-  pageController.imageArray = [self galleryImages];
-
-  [self.navigationController pushViewController:pageController animated:YES];
+  
+  CWPhotoGalleryFlowLayout *galleryFlowLayout     = [[CWPhotoGalleryFlowLayout alloc] init];
+  CWPhotoViewerPhotoViewController *galleryViewer = [[CWPhotoViewerPhotoViewController alloc] initWithPhotos:[self galleryImages]
+                                                                                                     atIndex:0
+                                                                                     forCollectionViewLayout:galleryFlowLayout];
+  
+  [self.navigationController pushViewController:galleryViewer animated:YES];
 }
 
-- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
+- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView
+           viewForSupplementaryElementOfKind:(NSString *)kind
+                                 atIndexPath:(NSIndexPath *)indexPath {
 
   /**
    * Even though this method has been implemented it will NOT get called unless
@@ -104,7 +108,7 @@
   if ([kind isEqualToString:UICollectionElementKindSectionFooter]) {
 
     CWPhotoViewerGalleryPhotoListingFooterView *footerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionFooter
-                                                                                     withReuseIdentifier:@"PhotoListingFooter"
+                                                                                     withReuseIdentifier:CWPhotoViewerFooterIdentifier
                                                                                             forIndexPath:indexPath];
 
     footerView.numberOfPhotos.text = [NSString stringWithFormat:@"%d photos", [self.galleryImages count]];

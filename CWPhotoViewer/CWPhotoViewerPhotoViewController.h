@@ -9,8 +9,12 @@
 #import <UIKit/UIKit.h>
 #import <AssetsLibrary/AssetsLibrary.h>
 
-@interface CWPhotoViewerPhotoViewController : UIViewController
+@interface CWPhotoViewerPhotoViewController : UICollectionViewController
 
-@property (strong, nonatomic) ALAsset *photo;
+@property (nonatomic, assign, readonly) NSInteger currentIndex;
+
+- (id)initWithPhotos:(NSArray *)photos
+             atIndex:(NSInteger)idx
+forCollectionViewLayout:(UICollectionViewLayout *)layout;
 
 @end

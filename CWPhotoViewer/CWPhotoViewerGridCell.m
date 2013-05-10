@@ -8,6 +8,8 @@
 
 #import "CWPhotoViewerGridCell.h"
 
+NSString * const CWPhotoViewerGridCellIdentifier = @"THUMBNAIL_CELL";
+
 @implementation CWPhotoViewerGridCell
 
 @synthesize imgView;

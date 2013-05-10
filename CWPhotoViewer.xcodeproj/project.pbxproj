@@ -9,12 +9,13 @@
 /* Begin PBXBuildFile section */
 		01032937161494010013ACB1 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01032934161493F90013ACB1 /* QuartzCore.framework */; };
 		0103293A1614A51A0013ACB1 /* CWPhotoViewerGalleryPhotoListingFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 010329391614A51A0013ACB1 /* CWPhotoViewerGalleryPhotoListingFooterView.m */; };
-		0144457615AB5EBD00524DCF /* CWPhotoViewerGridCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0144457515AB5EBD00524DCF /* CWPhotoViewerGridCell.m */; };
 		0144457D15AB608F00524DCF /* CWPhotoViewerGridFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 0144457C15AB608F00524DCF /* CWPhotoViewerGridFlowLayout.m */; };
 		0145DB8915AB41140059AC13 /* CWPhotoViewerGalleryImagesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0145DB8815AB41140059AC13 /* CWPhotoViewerGalleryImagesViewController.m */; };
 		014E368215ABB315002E6FC4 /* CWPhotoViewerPhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 014E368115ABB315002E6FC4 /* CWPhotoViewerPhotoViewController.m */; };
-		014E368B15ABBA6A002E6FC4 /* CWPhotoViewerPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 014E368A15ABBA6A002E6FC4 /* CWPhotoViewerPageViewController.m */; };
 		01841E1016FAAC05001C42C4 /* CWPhotoViewerGalleryListingCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 01841E0F16FAAC05001C42C4 /* CWPhotoViewerGalleryListingCell.m */; };
+		018A12D0173C89B50014ACF9 /* CWPhotoViewerGridCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 018A12CF173C89B50014ACF9 /* CWPhotoViewerGridCell.m */; };
+		018A12D5173C8AB20014ACF9 /* CWPhotoGalleryFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 018A12D4173C8AB20014ACF9 /* CWPhotoGalleryFlowLayout.m */; };
+		018A12D8173C8CE20014ACF9 /* CWPhotoGalleryCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 018A12D7173C8CE20014ACF9 /* CWPhotoGalleryCell.m */; };
 		0190278915A4AE0800F2B6BA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0190278815A4AE0800F2B6BA /* UIKit.framework */; };
 		0190278B15A4AE0800F2B6BA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0190278A15A4AE0800F2B6BA /* Foundation.framework */; };
 		0190278D15A4AE0800F2B6BA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0190278C15A4AE0800F2B6BA /* CoreGraphics.framework */; };
@@ -32,17 +33,19 @@
 		010329381614A51A0013ACB1 /* CWPhotoViewerGalleryPhotoListingFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CWPhotoViewerGalleryPhotoListingFooterView.h; sourceTree = "<group>"; };
 		010329391614A51A0013ACB1 /* CWPhotoViewerGalleryPhotoListingFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CWPhotoViewerGalleryPhotoListingFooterView.m; sourceTree = "<group>"; };
 		0144457415AB5EBD00524DCF /* CWPhotoViewerGridCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CWPhotoViewerGridCell.h; sourceTree = "<group>"; };
-		0144457515AB5EBD00524DCF /* CWPhotoViewerGridCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CWPhotoViewerGridCell.m; sourceTree = "<group>"; };
 		0144457B15AB608F00524DCF /* CWPhotoViewerGridFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CWPhotoViewerGridFlowLayout.h; sourceTree = "<group>"; };
 		0144457C15AB608F00524DCF /* CWPhotoViewerGridFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CWPhotoViewerGridFlowLayout.m; sourceTree = "<group>"; };
 		0145DB8715AB41140059AC13 /* CWPhotoViewerGalleryImagesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CWPhotoViewerGalleryImagesViewController.h; sourceTree = "<group>"; };
 		0145DB8815AB41140059AC13 /* CWPhotoViewerGalleryImagesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CWPhotoViewerGalleryImagesViewController.m; sourceTree = "<group>"; };
 		014E368015ABB315002E6FC4 /* CWPhotoViewerPhotoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CWPhotoViewerPhotoViewController.h; sourceTree = "<group>"; };
 		014E368115ABB315002E6FC4 /* CWPhotoViewerPhotoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CWPhotoViewerPhotoViewController.m; sourceTree = "<group>"; };
-		014E368915ABBA6A002E6FC4 /* CWPhotoViewerPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CWPhotoViewerPageViewController.h; sourceTree = "<group>"; };
-		014E368A15ABBA6A002E6FC4 /* CWPhotoViewerPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CWPhotoViewerPageViewController.m; sourceTree = "<group>"; };
 		01841E0E16FAAC05001C42C4 /* CWPhotoViewerGalleryListingCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CWPhotoViewerGalleryListingCell.h; sourceTree = "<group>"; };
 		01841E0F16FAAC05001C42C4 /* CWPhotoViewerGalleryListingCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CWPhotoViewerGalleryListingCell.m; sourceTree = "<group>"; };
+		018A12CF173C89B50014ACF9 /* CWPhotoViewerGridCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CWPhotoViewerGridCell.m; sourceTree = "<group>"; };
+		018A12D3173C8AB20014ACF9 /* CWPhotoGalleryFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CWPhotoGalleryFlowLayout.h; sourceTree = "<group>"; };
+		018A12D4173C8AB20014ACF9 /* CWPhotoGalleryFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CWPhotoGalleryFlowLayout.m; sourceTree = "<group>"; };
+		018A12D6173C8CE20014ACF9 /* CWPhotoGalleryCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CWPhotoGalleryCell.h; sourceTree = "<group>"; };
+		018A12D7173C8CE20014ACF9 /* CWPhotoGalleryCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CWPhotoGalleryCell.m; sourceTree = "<group>"; };
 		0190278415A4AE0800F2B6BA /* CWPhotoViewer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CWPhotoViewer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0190278815A4AE0800F2B6BA /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		0190278A15A4AE0800F2B6BA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -88,12 +91,12 @@
 		0144458715AB6A7C00524DCF /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				018A12D2173C8A8F0014ACF9 /* Gallery */,
+				01841E0E16FAAC05001C42C4 /* CWPhotoViewerGalleryListingCell.h */,
+				01841E0F16FAAC05001C42C4 /* CWPhotoViewerGalleryListingCell.m */,
 				010329381614A51A0013ACB1 /* CWPhotoViewerGalleryPhotoListingFooterView.h */,
 				010329391614A51A0013ACB1 /* CWPhotoViewerGalleryPhotoListingFooterView.m */,
-				0144457415AB5EBD00524DCF /* CWPhotoViewerGridCell.h */,
-				0144457515AB5EBD00524DCF /* CWPhotoViewerGridCell.m */,
-				0144457B15AB608F00524DCF /* CWPhotoViewerGridFlowLayout.h */,
-				0144457C15AB608F00524DCF /* CWPhotoViewerGridFlowLayout.m */,
+				018A12D1173C8A790014ACF9 /* PhotoThumbnails */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -104,6 +107,28 @@
 				0144458615AB6A6300524DCF /* XIBs */,
 			);
 			name = UI;
+			sourceTree = "<group>";
+		};
+		018A12D1173C8A790014ACF9 /* PhotoThumbnails */ = {
+			isa = PBXGroup;
+			children = (
+				0144457415AB5EBD00524DCF /* CWPhotoViewerGridCell.h */,
+				018A12CF173C89B50014ACF9 /* CWPhotoViewerGridCell.m */,
+				0144457B15AB608F00524DCF /* CWPhotoViewerGridFlowLayout.h */,
+				0144457C15AB608F00524DCF /* CWPhotoViewerGridFlowLayout.m */,
+			);
+			name = PhotoThumbnails;
+			sourceTree = "<group>";
+		};
+		018A12D2173C8A8F0014ACF9 /* Gallery */ = {
+			isa = PBXGroup;
+			children = (
+				018A12D6173C8CE20014ACF9 /* CWPhotoGalleryCell.h */,
+				018A12D7173C8CE20014ACF9 /* CWPhotoGalleryCell.m */,
+				018A12D3173C8AB20014ACF9 /* CWPhotoGalleryFlowLayout.h */,
+				018A12D4173C8AB20014ACF9 /* CWPhotoGalleryFlowLayout.m */,
+			);
+			name = Gallery;
 			sourceTree = "<group>";
 		};
 		0190277915A4AE0800F2B6BA = {
@@ -144,15 +169,11 @@
 				0145DB8815AB41140059AC13 /* CWPhotoViewerGalleryImagesViewController.m */,
 				0190279A15A4AE0800F2B6BA /* CWPhotoViewerMasterViewController.h */,
 				0190279B15A4AE0800F2B6BA /* CWPhotoViewerMasterViewController.m */,
-				014E368915ABBA6A002E6FC4 /* CWPhotoViewerPageViewController.h */,
-				014E368A15ABBA6A002E6FC4 /* CWPhotoViewerPageViewController.m */,
 				014E368015ABB315002E6FC4 /* CWPhotoViewerPhotoViewController.h */,
 				014E368115ABB315002E6FC4 /* CWPhotoViewerPhotoViewController.m */,
 				0190278F15A4AE0800F2B6BA /* Supporting Files */,
 				0145DB8B15AB411A0059AC13 /* UI */,
 				0144458715AB6A7C00524DCF /* Views */,
-				01841E0E16FAAC05001C42C4 /* CWPhotoViewerGalleryListingCell.h */,
-				01841E0F16FAAC05001C42C4 /* CWPhotoViewerGalleryListingCell.m */,
 			);
 			path = CWPhotoViewer;
 			sourceTree = "<group>";
@@ -237,12 +258,13 @@
 				0190279915A4AE0800F2B6BA /* CWPhotoViewerDelegate.m in Sources */,
 				0190279C15A4AE0800F2B6BA /* CWPhotoViewerMasterViewController.m in Sources */,
 				0145DB8915AB41140059AC13 /* CWPhotoViewerGalleryImagesViewController.m in Sources */,
-				0144457615AB5EBD00524DCF /* CWPhotoViewerGridCell.m in Sources */,
 				0144457D15AB608F00524DCF /* CWPhotoViewerGridFlowLayout.m in Sources */,
 				014E368215ABB315002E6FC4 /* CWPhotoViewerPhotoViewController.m in Sources */,
-				014E368B15ABBA6A002E6FC4 /* CWPhotoViewerPageViewController.m in Sources */,
 				0103293A1614A51A0013ACB1 /* CWPhotoViewerGalleryPhotoListingFooterView.m in Sources */,
 				01841E1016FAAC05001C42C4 /* CWPhotoViewerGalleryListingCell.m in Sources */,
+				018A12D0173C89B50014ACF9 /* CWPhotoViewerGridCell.m in Sources */,
+				018A12D5173C8AB20014ACF9 /* CWPhotoGalleryFlowLayout.m in Sources */,
+				018A12D8173C8CE20014ACF9 /* CWPhotoGalleryCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -283,6 +305,7 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Cory Wiles (98422P78Z5)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -297,6 +320,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				PROVISIONING_PROFILE = "340668FA-5A14-4FE3-AF65-C663EF9AAA8B";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

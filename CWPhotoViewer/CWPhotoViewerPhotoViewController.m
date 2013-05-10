@@ -7,39 +7,78 @@
 //
 
 #import "CWPhotoViewerPhotoViewController.h"
+#import "CWPhotoGalleryCell.h"
 
 @interface CWPhotoViewerPhotoViewController ()
+
+@property (nonatomic, copy) NSArray *imageArray;
 
 @end
 
 @implementation CWPhotoViewerPhotoViewController
 
-@synthesize photo;
+- (id)initWithPhotos:(NSArray *)photos
+             atIndex:(NSInteger)idx
+forCollectionViewLayout:(UICollectionViewLayout *)layout {
 
-- (void)loadView {
+  self = [super initWithCollectionViewLayout:layout];
+  
+  if (self) {
+  
+    self.clearsSelectionOnViewWillAppear = YES;
 
-  self.view = [[UIImageView alloc] initWithFrame:[UIScreen mainScreen].bounds];
-  self.view.backgroundColor  = [UIColor blackColor];
+    _imageArray   = [photos copy];
+    _currentIndex = idx;
+  }
+  
+  return self;
+}
+
+- (id)initWithCollectionViewLayout:(UICollectionViewLayout *)layout {
+  return [self initWithPhotos:nil atIndex:0 forCollectionViewLayout:layout];
 }
 
 - (void)viewDidLoad {
 
   [super viewDidLoad];
 
-  UIImageView *imgView   = (UIImageView *)self.view;
-  dispatch_queue_t queue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0);
+  [self.collectionView setPagingEnabled:YES];
+  [self.collectionView registerClass:[CWPhotoGalleryCell class]
+          forCellWithReuseIdentifier:CWPhotoGalleryCellIdentifier];
+  
+  NSLog(@"photo: %@", self.imageArray[0]);
+}
 
-  imgView.contentMode = UIViewContentModeScaleAspectFit;
+#pragma mark - UICollectionView Delegate and Datasource Methods
 
-  dispatch_async(queue, ^{
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
+  return 1;
+}
 
-    ALAssetRepresentation *rep = [self.photo defaultRepresentation];
-    CGImageRef ref             = [rep fullScreenImage];
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+  return [self.imageArray count];
+}
 
-    dispatch_sync(dispatch_get_main_queue(), ^{
-      imgView.image = [[UIImage alloc] initWithCGImage:ref];
-    });
-  });
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+  
+  CWPhotoGalleryCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CWPhotoGalleryCellIdentifier
+                                                                       forIndexPath:indexPath];
+  ALAsset *photo             = [self.imageArray objectAtIndex:indexPath.row];    
+  ALAssetRepresentation *rep = [photo defaultRepresentation];
+
+  CGImageRef ref = [rep fullScreenImage];
+  UIImage *img   = [[UIImage alloc] initWithCGImage:ref];
+  
+  cell.imageView.image = img;
+
+  return cell;
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView
+                  layout:(UICollectionViewLayout *)collectionViewLayout
+  sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+  
+  return self.view.bounds.size;
 }
 
 - (void)didReceiveMemoryWarning {

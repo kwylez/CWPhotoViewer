@@ -12,4 +12,6 @@ extern NSString * const  CWPhotoGalleryCellIdentifier;
 
 @interface CWPhotoGalleryCell : UICollectionViewCell
 
+@property (nonatomic, strong) UIImageView *imageView;
+
 @end

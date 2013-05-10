@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+extern NSString * const CWPhotoViewerFooterIdentifier;
+
 @interface CWPhotoViewerGalleryPhotoListingFooterView : UICollectionReusableView
 
 @property (nonatomic, strong) UILabel *numberOfPhotos;

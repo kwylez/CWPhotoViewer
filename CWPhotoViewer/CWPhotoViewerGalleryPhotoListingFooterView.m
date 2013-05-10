@@ -8,6 +8,8 @@
 
 #import "CWPhotoViewerGalleryPhotoListingFooterView.h"
 
+NSString * const CWPhotoViewerFooterIdentifier = @"PhotoListingFooter";
+
 @implementation CWPhotoViewerGalleryPhotoListingFooterView
 
 - (id)initWithFrame:(CGRect)frame {

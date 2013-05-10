@@ -16,7 +16,7 @@
 
   self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 
-  CWPhotoViewerMasterViewController *masterViewController = [[CWPhotoViewerMasterViewController alloc] initWithNibName:@"CWMasterViewController_iPhone" bundle:nil];
+  CWPhotoViewerMasterViewController *masterViewController = [[CWPhotoViewerMasterViewController alloc] initWithNibName:@"CWPhotoViewerMasterViewController_iPhone" bundle:nil];
 
   self.navigationController = [[UINavigationController alloc] initWithRootViewController:masterViewController];
 
