@@ -91,11 +91,11 @@
 		0144458715AB6A7C00524DCF /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				018A12D2173C8A8F0014ACF9 /* Gallery */,
 				01841E0E16FAAC05001C42C4 /* CWPhotoViewerGalleryListingCell.h */,
 				01841E0F16FAAC05001C42C4 /* CWPhotoViewerGalleryListingCell.m */,
 				010329381614A51A0013ACB1 /* CWPhotoViewerGalleryPhotoListingFooterView.h */,
 				010329391614A51A0013ACB1 /* CWPhotoViewerGalleryPhotoListingFooterView.m */,
+				018A12D2173C8A8F0014ACF9 /* Gallery */,
 				018A12D1173C8A790014ACF9 /* PhotoThumbnails */,
 			);
 			name = Views;
@@ -165,12 +165,7 @@
 			children = (
 				0190279715A4AE0800F2B6BA /* CWPhotoViewerDelegate.h */,
 				0190279815A4AE0800F2B6BA /* CWPhotoViewerDelegate.m */,
-				0145DB8715AB41140059AC13 /* CWPhotoViewerGalleryImagesViewController.h */,
-				0145DB8815AB41140059AC13 /* CWPhotoViewerGalleryImagesViewController.m */,
-				0190279A15A4AE0800F2B6BA /* CWPhotoViewerMasterViewController.h */,
-				0190279B15A4AE0800F2B6BA /* CWPhotoViewerMasterViewController.m */,
-				014E368015ABB315002E6FC4 /* CWPhotoViewerPhotoViewController.h */,
-				014E368115ABB315002E6FC4 /* CWPhotoViewerPhotoViewController.m */,
+				01C5DF3F173D703A007C8A63 /* Controllers */,
 				0190278F15A4AE0800F2B6BA /* Supporting Files */,
 				0145DB8B15AB411A0059AC13 /* UI */,
 				0144458715AB6A7C00524DCF /* Views */,
@@ -187,6 +182,19 @@
 				0190279615A4AE0800F2B6BA /* CWPhotoViewer-Prefix.pch */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		01C5DF3F173D703A007C8A63 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				0145DB8715AB41140059AC13 /* CWPhotoViewerGalleryImagesViewController.h */,
+				0145DB8815AB41140059AC13 /* CWPhotoViewerGalleryImagesViewController.m */,
+				0190279A15A4AE0800F2B6BA /* CWPhotoViewerMasterViewController.h */,
+				0190279B15A4AE0800F2B6BA /* CWPhotoViewerMasterViewController.m */,
+				014E368015ABB315002E6FC4 /* CWPhotoViewerPhotoViewController.h */,
+				014E368115ABB315002E6FC4 /* CWPhotoViewerPhotoViewController.m */,
+			);
+			name = Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
