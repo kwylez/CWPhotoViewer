@@ -62,10 +62,11 @@
   CWPhotoViewerGridCell *cell = [cv dequeueReusableCellWithReuseIdentifier:CWPhotoViewerGridCellIdentifier
                                                    forIndexPath:indexPath];
 
-  ALAsset *asset = (ALAsset *)[self galleryImages][indexPath.row];
+  ALAsset *asset     = (ALAsset *)[self galleryImages][indexPath.row];
+  UIImage *thumbnail = [UIImage imageWithCGImage:[asset thumbnail]];
 
   cell.label.text    = [NSString stringWithFormat:@"%d",indexPath.item];
-  cell.imgView.image = [UIImage imageWithCGImage:[asset thumbnail]];
+  cell.imgView.image = thumbnail;
 
   return cell;
 }
@@ -74,7 +75,7 @@
   
   CWPhotoGalleryFlowLayout *galleryFlowLayout     = [[CWPhotoGalleryFlowLayout alloc] init];
   CWPhotoViewerPhotoViewController *galleryViewer = [[CWPhotoViewerPhotoViewController alloc] initWithPhotos:[self galleryImages]
-                                                                                                     atIndex:0
+                                                                                                 atIndexPath:indexPath
                                                                                      forCollectionViewLayout:galleryFlowLayout];
   
   [self.navigationController pushViewController:galleryViewer animated:YES];

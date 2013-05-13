@@ -11,10 +11,8 @@
 
 @interface CWPhotoViewerPhotoViewController : UICollectionViewController
 
-@property (nonatomic, assign, readonly) NSInteger currentIndex;
-
 - (id)initWithPhotos:(NSArray *)photos
-             atIndex:(NSInteger)idx
+             atIndexPath:(NSIndexPath *)indexPath
 forCollectionViewLayout:(UICollectionViewLayout *)layout;
 
 @end

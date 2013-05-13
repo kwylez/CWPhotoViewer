@@ -12,13 +12,14 @@
 @interface CWPhotoViewerPhotoViewController()
 
 @property (nonatomic, copy) NSArray *imageArray;
+@property (nonatomic, strong) NSIndexPath *selectedIndexPath;
 
 @end
 
 @implementation CWPhotoViewerPhotoViewController
 
 - (id)initWithPhotos:(NSArray *)photos
-             atIndex:(NSInteger)idx
+         atIndexPath:(NSIndexPath *)indexPath
 forCollectionViewLayout:(UICollectionViewLayout *)layout {
 
   self = [super initWithCollectionViewLayout:layout];
@@ -27,15 +28,11 @@ forCollectionViewLayout:(UICollectionViewLayout *)layout {
   
     self.clearsSelectionOnViewWillAppear = YES;
 
-    _imageArray   = [photos copy];
-    _currentIndex = idx;
+    _imageArray        = [photos copy];
+    _selectedIndexPath = indexPath;
   }
   
   return self;
-}
-
-- (id)initWithCollectionViewLayout:(UICollectionViewLayout *)layout {
-  return [self initWithPhotos:nil atIndex:0 forCollectionViewLayout:layout];
 }
 
 - (void)viewDidLoad {
@@ -45,6 +42,8 @@ forCollectionViewLayout:(UICollectionViewLayout *)layout {
   [self.collectionView setPagingEnabled:YES];
   [self.collectionView registerClass:[CWPhotoGalleryCell class]
           forCellWithReuseIdentifier:CWPhotoGalleryCellIdentifier];
+  
+  [self.collectionView scrollToItemAtIndexPath:self.selectedIndexPath atScrollPosition:UICollectionViewScrollPositionRight animated:YES];
 }
 
 #pragma mark - UICollectionView Delegate and Datasource Methods
