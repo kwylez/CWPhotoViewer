@@ -9,7 +9,7 @@
 #import "CWPhotoViewerPhotoViewController.h"
 #import "CWPhotoGalleryCell.h"
 
-@interface CWPhotoViewerPhotoViewController ()
+@interface CWPhotoViewerPhotoViewController()
 
 @property (nonatomic, copy) NSArray *imageArray;
 
@@ -61,6 +61,8 @@ forCollectionViewLayout:(UICollectionViewLayout *)layout {
   
   CWPhotoGalleryCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CWPhotoGalleryCellIdentifier
                                                                        forIndexPath:indexPath];
+  
+  cell.navigationControllerContainer = self.navigationController;
 
   ALAsset *photo             = [self.imageArray objectAtIndex:indexPath.row];
   ALAssetRepresentation *rep = [photo defaultRepresentation];

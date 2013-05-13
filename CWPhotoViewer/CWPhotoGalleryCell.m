@@ -13,13 +13,18 @@ NSString * const  CWPhotoGalleryCellIdentifier = @"CWPhotoGalleryCell";
 static const CGFloat ZOOM_FACTOR     = 1.5f;
 static const CGFloat MAX_ZOOM_FACTOR = 2.5f;
 
-@interface CWPhotoGalleryCell()<UIScrollViewDelegate>
+@interface CWPhotoGalleryCell() <UIScrollViewDelegate, UIGestureRecognizerDelegate>
 
 @property (nonatomic, strong) UIImageView *imageView;
 @property (nonatomic, strong) UIScrollView *scrollView;
+@property (nonatomic, assign) BOOL navigationVisible;
 
 - (CGRect)zoomRectForScale:(CGFloat)scale withCenter:(CGPoint)center;
 - (void)addGestures;
+- (void)handleSingleTap:(UIGestureRecognizer *)gestureRecognizer;
+- (void)handleDoubleTap:(UIGestureRecognizer *)gestureRecognizer;
+- (void)handleTwoFingerTap:(UIGestureRecognizer *)gestureRecognizer;
+- (void)toggleNavigationVisibleWithAnimation;
 
 @end
 
@@ -30,6 +35,8 @@ static const CGFloat MAX_ZOOM_FACTOR = 2.5f;
   self = [super initWithFrame:frame];
   
   if (self) {
+
+    _navigationVisible = NO;
 
     _scrollView = [[UIScrollView alloc] initWithFrame:CGRectZero];
     
@@ -80,6 +87,12 @@ static const CGFloat MAX_ZOOM_FACTOR = 2.5f;
   return self.imageView;
 }
 
+#pragma makr - UIGestureRecognizer Delegate
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
+  return YES;
+}
+
 #pragma mark - Private Methods
 
 - (CGRect)zoomRectForScale:(CGFloat)scale withCenter:(CGPoint)center {
@@ -107,14 +120,28 @@ static const CGFloat MAX_ZOOM_FACTOR = 2.5f;
 
 - (void)addGestures {
   
+  UITapGestureRecognizer *singleTap    = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleSingleTap:)];
   UITapGestureRecognizer *doubleTap    = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleDoubleTap:)];
   UITapGestureRecognizer *twoFingerTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTwoFingerTap:)];
   
+  singleTap.delegate = self;
+  
+  [singleTap setNumberOfTapsRequired:1];
   [doubleTap setNumberOfTapsRequired:2];
   [twoFingerTap setNumberOfTouchesRequired:2];
 
+  [self.imageView addGestureRecognizer:singleTap];
   [self.imageView addGestureRecognizer:doubleTap];
   [self.imageView addGestureRecognizer:twoFingerTap];
+  
+  [singleTap requireGestureRecognizerToFail:doubleTap];
+}
+
+- (void)handleSingleTap:(UIGestureRecognizer *)gestureRecognizer {
+
+  if (self.navigationControllerContainer) {
+    [self toggleNavigationVisibleWithAnimation];
+  }
 }
 
 - (void)handleDoubleTap:(UIGestureRecognizer *)gestureRecognizer {
@@ -135,5 +162,11 @@ static const CGFloat MAX_ZOOM_FACTOR = 2.5f;
   [self.scrollView zoomToRect:zoomRect animated:YES];
 }
 
+- (void)toggleNavigationVisibleWithAnimation {
+  
+  self.navigationVisible = !self.navigationVisible;
+
+  [self.navigationControllerContainer setNavigationBarHidden:self.navigationVisible animated:YES];
+}
 
 @end
