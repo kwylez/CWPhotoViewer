@@ -106,7 +106,8 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 
   CWPhotoViewerGridFlowLayout *layout = [[CWPhotoViewerGridFlowLayout alloc] init];
-  ALAssetsGroup *g         = (ALAssetsGroup*)[self.objects objectAtIndex:indexPath.row];
+
+  ALAssetsGroup *g = (ALAssetsGroup*)[self.objects objectAtIndex:indexPath.row];
 
   CWPhotoViewerGalleryImagesViewController *gallery = [[CWPhotoViewerGalleryImagesViewController alloc] initWithCollectionViewLayout:layout];
 

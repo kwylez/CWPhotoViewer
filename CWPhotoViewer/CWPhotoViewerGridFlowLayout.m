@@ -16,10 +16,11 @@
 
   if (self) {
 
-    self.itemSize                = CGSizeMake(75, 75);
-    self.sectionInset            = UIEdgeInsetsMake(2.0, 2.0, 2.0, 2.0);
-    self.minimumInteritemSpacing = 2.0;
+    self.itemSize                = CGSizeMake(75, 82);
+    self.sectionInset            = UIEdgeInsetsMake(4.0, 4.0, 4.0, 4.0);
+    self.minimumInteritemSpacing = 4.0f;
     self.footerReferenceSize     = CGSizeMake(100, 100);
+    self.minimumLineSpacing      = 4.0f;
   }
 
   return self;
